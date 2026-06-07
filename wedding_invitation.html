@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shoxrux & Xanifa</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&family=Marck+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@400;600&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #b8935a;
+    --gold-light: #d4b483;
+    --gold-dark: #8a6a30;
+    --cream: #faf6ee;
+    --cream2: #f5f0e4;
+    --cream3: #ede6d4;
+    --red: #b83225;
+    --red-bright: #d63b2c;
+    --dark: #1a130a;
+    --mid: #5a4a30;
+    --emerald: #1a5c3a;
+    --emerald-light: #2d7a52;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Cormorant Garamond', serif; color: var(--dark); overflow-x: hidden; background: var(--cream); }
+
+  .scroll-snap { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-snap-stop: always; }
+  section { scroll-snap-align: start; height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+
+  /* ── КРЕМОВЫЙ ФОН ── */
+  .cream-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 110% 70% at 20% 30%, #fffaea 0%, transparent 60%),
+      radial-gradient(ellipse 90% 60% at 80% 70%, #f5edd8 0%, transparent 55%),
+      linear-gradient(155deg, #fdf9f0 0%, #f5edd8 40%, #faf4e6 70%, #ede5cc 100%);
+    animation: creamA 12s ease-in-out infinite alternate;
+  }
+  @keyframes creamA { 0%{filter:brightness(0.97);} 100%{filter:brightness(1.02);} }
+
+  .cream-shimmer {
+    position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(108deg, transparent 25%, rgba(255,248,220,0.45) 42%, rgba(255,255,255,0.3) 50%, rgba(255,248,220,0.45) 58%, transparent 75%);
+    animation: shimC 10s ease-in-out infinite alternate;
+  }
+  @keyframes shimC { 0%{transform:translateX(-40%) skewX(-5deg);opacity:0.4;} 100%{transform:translateX(40%) skewX(5deg);opacity:0.85;} }
+
+  .cream-pattern {
+    position: absolute; inset: 0; opacity: 0.032; pointer-events: none;
+    background-image: repeating-conic-gradient(rgba(184,147,90,1) 0deg 8deg, transparent 8deg 20deg), repeating-conic-gradient(transparent 0deg 8deg, rgba(184,147,90,0.8) 8deg 20deg);
+    background-size: 55px 55px, 55px 55px;
+    background-position: 0 0, 27px 27px;
+  }
+
+  /* ══════════════════════════
+     SEC 1 — ГЕРОЙ
+  ══════════════════════════ */
+  #sec1 { padding: 0; background: #f5f0e4; }
+
+  .hero-photo { position: absolute; inset: 0; z-index: 1; }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+
+  /* Перекрытия */
+  .h-ov-top {
+    position: absolute; top: 0; left: 0; right: 0; height: 40%;
+    background: linear-gradient(180deg, rgba(250,246,238,0.88) 0%, rgba(250,246,238,0.3) 70%, transparent 100%);
+    z-index: 2;
+  }
+  .h-ov-bot {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 52%;
+    background: linear-gradient(0deg, rgba(245,240,228,0.97) 0%, rgba(245,240,228,0.65) 55%, transparent 100%);
+    z-index: 2;
+  }
+
+  /* Контент */
+  .hero-content {
+    position: absolute; inset: 0; z-index: 3;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: space-between;
+    padding: 5.5% 2rem 4.5%;
+  }
+
+  .hero-top { text-align: center; animation: fdDown 1.4s ease forwards; }
+
+  .invite-tag {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.48rem, 1.2vw, 0.62rem);
+    letter-spacing: 0.5em; color: var(--mid);
+    text-transform: uppercase; opacity: 0.75; display: block; margin-bottom: 0.3rem;
+  }
+  .top-orn { color: var(--gold); font-size: 1rem; letter-spacing: 0.45em; opacity: 0.55; display: block; }
+
+  .hero-bot { text-align: center; animation: fdUp 1.4s ease forwards; width: 100%; }
+
+  /* ── ИМЕНА — каллиграфия ── */
+  .names-calligraphy {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(4rem, 13vw, 7.5rem);
+    line-height: 0.95;
+    /* Чёрный цвет с едва заметной золотой обводкой */
+    color: #0f0a04;
+    -webkit-text-stroke: 0.4px rgba(184, 147, 90, 0.55);
+    text-stroke: 0.4px rgba(184, 147, 90, 0.55);
+    /* Тонкая золотая тень для глубины */
+    text-shadow:
+      0 0 1px rgba(184,147,90,0.3),
+      0 1px 2px rgba(255,248,220,0.6),
+      0 2px 8px rgba(250,246,238,0.5);
+    margin-bottom: 0.5rem;
+    display: block;
+    letter-spacing: 0.01em;
+  }
+
+  .amp-calligraphy {
+    font-family: 'Pinyon Script', cursive;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    color: var(--gold-dark);
+    opacity: 0.7;
+    display: block;
+    line-height: 1;
+    margin: -0.3rem 0;
+  }
+
+  .hero-line {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.9rem; margin: 0.5rem 0 0.6rem;
+  }
+  .h-line { width: 50px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dark), transparent); opacity: 0.5; }
+  .h-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0.5; }
+
+  .hero-sub {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.48rem, 1.2vw, 0.6rem);
+    letter-spacing: 0.42em; color: var(--mid);
+    text-transform: uppercase; opacity: 0.65;
+    display: block; margin-bottom: 0.55rem;
+  }
+
+  .hero-tagline {
+    font-style: italic;
+    font-size: clamp(0.82rem, 2vw, 1.05rem);
+    color: var(--mid); opacity: 0.8;
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 3.5%; left: 50%; transform: translateX(-50%);
+    font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.3em;
+    color: var(--gold-dark); opacity: 0.45; text-transform: uppercase;
+    animation: bounce 2.2s ease-in-out infinite; z-index: 5;
+    display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+  }
+  .scroll-hint::after { content: "↓"; font-size: 0.95rem; }
+
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(7px);} }
+  @keyframes fdUp   { from{opacity:0;transform:translateY(28px);} to{opacity:1;transform:translateY(0);} }
+  @keyframes fdDown { from{opacity:0;transform:translateY(-22px);} to{opacity:1;transform:translateY(0);} }
+
+  /* ══════════════════════════
+     SEC 2 — КАЛЕНДАРЬ
+  ══════════════════════════ */
+  #sec2 { background: var(--cream2); }
+
+  .cal-wrap { position: relative; z-index: 4; text-align: center; padding: 1rem; }
+  .cal-eyebrow { font-family: 'Cinzel', serif; font-size: clamp(0.52rem,1.3vw,0.68rem); letter-spacing: 0.5em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 1.1rem; }
+  .cal-box {
+    background: rgba(255,255,255,0.55); border: 1px solid rgba(184,147,90,0.18);
+    border-radius: 14px; padding: 1.35rem; width: min(325px,88vw); margin: 0 auto;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 12px 40px rgba(180,140,70,0.1), inset 0 1px 0 rgba(255,255,255,0.85);
+  }
+  .cal-title { font-family: 'Cinzel', serif; font-size: clamp(0.88rem,2.2vw,1.02rem); color: var(--gold-dark); letter-spacing: 0.2em; margin-bottom: 0.85rem; }
+  .cal-head { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; margin-bottom: 4px; }
+  .cdn { font-family: 'Cinzel', serif; font-size: 0.52rem; color: rgba(90,74,48,0.42); letter-spacing: 0.06em; text-align: center; padding: 3px 0; }
+  .cal-days { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; }
+  .cd { aspect-ratio:1; display:flex; align-items:center; justify-content:center; border-radius:50%; font-family:'Cormorant Garamond',serif; font-size:clamp(0.68rem,1.8vw,0.82rem); color:rgba(42,31,18,0.42); }
+  .cd.empty { opacity:0; }
+  .cd.hi {
+    background: var(--red); color: #fff; font-weight:700;
+    font-size: clamp(0.85rem,2.2vw,1rem);
+    box-shadow: 0 0 0 2px rgba(182,50,37,0.3), 0 0 16px rgba(182,50,37,0.42);
+    animation: puls 2s ease-in-out infinite; position:relative; z-index:1;
+  }
+  .cd.hi::after {
+    content:''; position:absolute; inset:-5px;
+    border: 1.5px solid var(--red-bright); border-radius:50%;
+    animation: ring 2s ease-in-out infinite;
+  }
+  @keyframes puls { 0%,100%{box-shadow:0 0 0 2px rgba(182,50,37,0.3),0 0 16px rgba(182,50,37,0.42);} 50%{box-shadow:0 0 0 5px rgba(182,50,37,0.14),0 0 28px rgba(182,50,37,0.58);} }
+  @keyframes ring  { 0%,100%{opacity:0.8;transform:scale(1);} 50%{opacity:0.18;transform:scale(1.18);} }
+
+  .date-banner { display:flex; align-items:center; justify-content:center; gap:0.9rem; margin-top:1.1rem; }
+  .dn { font-family:'Cormorant Garamond',serif; font-size:clamp(2.6rem,7.5vw,4rem); color:var(--red-bright); line-height:1; font-weight:400; font-style:italic; }
+  .dm { font-family:'Cinzel',serif; font-size:clamp(0.82rem,2.2vw,0.98rem); letter-spacing:0.2em; color:var(--gold-dark); text-transform:uppercase; }
+  .dy { font-family:'Cormorant Garamond',serif; font-size:clamp(1rem,2.6vw,1.4rem); color:var(--mid); font-style:italic; }
+
+  /* ══════════════════════════
+     SEC 3 — Ч/Б ФОТО
+  ══════════════════════════ */
+  #sec3 { background: var(--cream3); }
+  .bw-container { position:relative; width:min(80vw,350px); z-index:4; }
+  .bw-container img { width:100%; display:block; border-radius:3px; }
+  .bw-overlay { position:absolute; bottom:0; left:0; right:0; padding:2.2rem 1.2rem 0.9rem; background:linear-gradient(0deg,rgba(245,240,228,0.97) 0%,transparent 100%); border-radius:0 0 3px 3px; text-align:center; }
+  .bw-quote { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(0.92rem,2.2vw,1.1rem); color:var(--mid); line-height:1.6; }
+  .time-block { position:relative; z-index:4; text-align:center; margin-top:1.3rem; }
+  .time-eyebrow { font-family:'Cinzel',serif; font-size:clamp(0.48rem,1.2vw,0.6rem); letter-spacing:0.4em; color:rgba(90,74,48,0.45); text-transform:uppercase; margin-bottom:0.25rem; }
+  .time-big { font-family:'Cormorant Garamond',serif; font-size:clamp(1.9rem,4.8vw,2.5rem); color:var(--dark); font-style:italic; }
+
+  /* ══════════════════════════
+     SEC 4 — ЛОКАЦИЯ
+  ══════════════════════════ */
+  #sec4 { background: var(--cream2); }
+  .loc-card { position:relative; z-index:4; text-align:center; width:min(88vw,440px); padding:1.6rem 1.6rem 1.2rem; background:rgba(255,255,255,0.58); border:1px solid rgba(184,147,90,0.16); border-radius:16px; backdrop-filter:blur(8px); box-shadow:0 14px 45px rgba(180,140,70,0.09),inset 0 1px 0 rgba(255,255,255,0.9); }
+  .loc-pin { font-size:2rem; animation:pinB 3s ease-in-out infinite; margin-bottom:0.45rem; display:block; }
+  @keyframes pinB { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-5px);} }
+  .venue-big { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.8rem,5.2vw,2.6rem); color:var(--dark); line-height:1.1; margin-bottom:0.2rem; }
+  .venue-sub2 { font-family:'Cinzel',serif; font-size:clamp(0.46rem,1.15vw,0.58rem); letter-spacing:0.35em; color:rgba(90,74,48,0.38); text-transform:uppercase; margin-bottom:0.9rem; }
+  .addr { font-size:clamp(0.76rem,1.8vw,0.9rem); color:var(--mid); line-height:1.7; margin-bottom:0.9rem; }
+  .map-btn { display:inline-flex; align-items:center; gap:0.45rem; padding:0.52rem 1.4rem; background:linear-gradient(135deg,var(--emerald),var(--emerald-light)); color:#fff; text-decoration:none; font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:0.16em; border-radius:50px; text-transform:uppercase; transition:all 0.3s; box-shadow:0 4px 14px rgba(26,92,58,0.22); }
+  .map-btn:hover { transform:translateY(-2px); box-shadow:0 7px 20px rgba(26,92,58,0.32); }
+  .tt { margin-top:0.9rem; width:100%; }
+  .tt-title { font-family:'Cinzel',serif; font-size:0.54rem; letter-spacing:0.38em; color:rgba(90,74,48,0.38); text-transform:uppercase; margin-bottom:0.5rem; }
+  .ti { display:flex; align-items:center; gap:0.65rem; padding:0.32rem 0; border-bottom:1px solid rgba(184,147,90,0.09); }
+  .ti:last-child { border-bottom:none; }
+  .tv { font-family:'Cinzel',serif; font-size:clamp(0.58rem,1.45vw,0.7rem); color:var(--gold-dark); min-width:46px; text-align:right; }
+  .tdot { width:4px; height:4px; border-radius:50%; background:var(--gold); opacity:0.35; flex-shrink:0; }
+  .td { font-size:clamp(0.66rem,1.65vw,0.8rem); color:var(--mid); }
+
+  /* ══════════════════════════
+     SEC 5 — ДРЕСС-КОД
+  ══════════════════════════ */
+  #sec5 { background: var(--cream3); }
+  .dress-card { position:relative; z-index:4; text-align:center; padding:1.8rem 2rem; max-width:min(88vw,400px); }
+  .dress-icons { display:flex; justify-content:center; gap:1.1rem; font-size:2.1rem; margin-bottom:0.85rem; }
+  .dress-ey { font-family:'Cinzel',serif; font-size:clamp(0.52rem,1.3vw,0.65rem); letter-spacing:0.45em; color:var(--gold-dark); text-transform:uppercase; margin-bottom:0.45rem; }
+  .dress-main2 { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.7rem,4.6vw,2.4rem); color:var(--dark); margin-bottom:0.65rem; }
+  .dress-desc2 { font-size:clamp(0.78rem,1.85vw,0.9rem); color:var(--mid); line-height:1.75; max-width:280px; margin:0 auto 1rem; }
+  .dress-tags { display:flex; justify-content:center; gap:0.42rem; flex-wrap:wrap; }
+  .dtag { padding:0.26rem 0.78rem; background:rgba(184,147,90,0.07); border:1px solid rgba(184,147,90,0.2); border-radius:50px; font-size:clamp(0.56rem,1.35vw,0.68rem); color:var(--gold-dark); font-family:'Cinzel',serif; letter-spacing:0.07em; }
+
+  /* ══════════════════════════
+     SEC 6 — ПОЖЕЛАНИЕ
+  ══════════════════════════ */
+  #sec6 { background: var(--cream2); }
+  .wish-wrap { position:relative; z-index:4; text-align:center; max-width:min(88vw,440px); padding:1.4rem; }
+  .wish-orn { font-size:1.7rem; color:var(--gold); opacity:0.38; display:block; letter-spacing:0.3em; margin-bottom:0.9rem; }
+  .wish-big { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.02rem,2.7vw,1.38rem); color:var(--dark); line-height:1.88; margin-bottom:1rem; }
+  .wish-small { font-size:clamp(0.75rem,1.85vw,0.88rem); color:var(--mid); line-height:1.8; max-width:300px; margin:0 auto; }
+  .g-div { display:flex; align-items:center; gap:0.9rem; margin:1rem auto; max-width:190px; }
+  .g-div::before,.g-div::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+  .g-div-icon { font-size:0.82rem; color:var(--gold); }
+
+  /* ══════════════════════════
+     SEC 7 — ФИНАЛ
+  ══════════════════════════ */
+  #sec7 { background: var(--cream3); }
+  .final-wrap { position:relative; width:min(85vw,395px); z-index:4; }
+  .final-wrap img { width:100%; display:block; border-radius:3px; filter:saturate(1.04); }
+  .final-ov { position:absolute; bottom:0; left:0; right:0; padding:2.8rem 1.4rem 1.1rem; background:linear-gradient(0deg,rgba(245,240,228,0.97) 0%,transparent 100%); border-radius:0 0 3px 3px; text-align:center; }
+  .final-title { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.4rem,4vw,2rem); color:#0f0a04; -webkit-text-stroke:0.4px rgba(184,147,90,0.55); text-shadow:0 0 1px rgba(184,147,90,0.3),0 1px 3px rgba(245,240,228,0.65); margin-bottom:0.2rem; }
+  .final-sub { font-family:'Cinzel',serif; font-size:clamp(0.46rem,1.15vw,0.6rem); letter-spacing:0.36em; color:rgba(90,74,48,0.42); text-transform:uppercase; }
+
+  .hearts-float { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+  .hp { position:absolute; opacity:0; animation:floatUp 7s ease-in infinite; }
+  @keyframes floatUp { 0%{opacity:0;transform:translateY(0) scale(0.5);} 20%{opacity:0.5;} 80%{opacity:0.18;} 100%{opacity:0;transform:translateY(-85px) scale(1.1);} }
+
+  /* ANIMATE */
+  .ai { opacity:0; transform:translateY(18px); transition:opacity 0.92s ease,transform 0.92s ease; }
+  .ai.d1 { transition-delay:0.12s; } .ai.d2 { transition-delay:0.26s; }
+  .ai.vis { opacity:1; transform:translateY(0); }
+
+  /* MUSIC */
+  .music-pill { position:fixed; bottom:1.1rem; right:1.1rem; z-index:999; display:flex; align-items:center; gap:0.45rem; padding:0.42rem 0.8rem; background:rgba(26,19,10,0.8); border:1px solid rgba(184,147,90,0.28); border-radius:50px; backdrop-filter:blur(14px); cursor:pointer; transition:all 0.3s; box-shadow:0 4px 16px rgba(0,0,0,0.15); }
+  .music-pill:hover { background:rgba(26,92,58,0.88); transform:scale(1.05); }
+  .mi { font-size:0.95rem; color:var(--gold-light); }
+  .ml { font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.18em; color:rgba(212,180,131,0.65); text-transform:uppercase; }
+  .mbars { display:flex; gap:2px; align-items:flex-end; height:12px; }
+  .mbars span { display:block; width:3px; background:var(--gold-light); border-radius:2px; opacity:0.28; height:4px; }
+  .mbars.on span { opacity:1; }
+  .mbars.on span:nth-child(1){animation:b1 0.75s ease-in-out infinite alternate;}
+  .mbars.on span:nth-child(2){animation:b1 0.55s 0.1s ease-in-out infinite alternate;}
+  .mbars.on span:nth-child(3){animation:b1 0.85s 0.2s ease-in-out infinite alternate;}
+  @keyframes b1 { from{height:3px;} to{height:12px;} }
+
+
+  .final-two-photos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: min(82vw, 380px);
+    z-index: 4;
+    position: relative;
+  }
+  .final-photo-item {
+    width: 100%;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .final-photo-item img {
+    width: 100%;
+    display: block;
+    filter: saturate(1.04);
+  }
+  .final-text-block {
+    position: relative; z-index: 4;
+    text-align: center; margin-top: 0.8rem;
+  }
+
+  /* ── SPLASH ── */
+  #splash {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: rgba(245,240,228,0.97);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: opacity 0.6s ease;
+  }
+  .splash-names {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3rem, 10vw, 5rem);
+    color: #0f0a04;
+    -webkit-text-stroke: 0.3px rgba(184,147,90,0.5);
+    text-shadow: 0 0 1px rgba(184,147,90,0.2);
+    line-height: 0.95; text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .splash-btn {
+    display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+    animation: splashPulse 2s ease-in-out infinite;
+  }
+  .splash-btn-circle {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, #1a5c3a, #2d7a52);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 24px rgba(26,92,58,0.3);
+    font-size: 1.6rem;
+  }
+  .splash-btn-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem; letter-spacing: 0.4em;
+    color: rgba(90,74,48,0.6); text-transform: uppercase;
+  }
+  .splash-date {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.5rem,1.3vw,0.65rem);
+    letter-spacing: 0.4em; color: rgba(90,74,48,0.45);
+    text-transform: uppercase; margin-top: 1.2rem;
+  }
+  @keyframes splashPulse {
+    0%,100% { transform: scale(1); opacity: 1; }
+    50%      { transform: scale(1.06); opacity: 0.85; }
+  }
+</style>
+</head>
+<body>
+
+
+<div id="splash">
+  <div class="splash-names">Shoxrux<br>&<br>Xanifa</div>
+  <div class="splash-btn">
+    <div class="splash-btn-circle">▶</div>
+    <div class="splash-btn-label">Открыть приглашение</div>
+  </div>
+  <div class="splash-date">22 · Июня · 2026 · Самарканд</div>
+</div>
+
+<div class="music-pill" onclick="toggleMusic()">
+  <span class="mi">♪</span>
+  <span class="ml">Музыка</span>
+  <div class="mbars" id="mb"><span></span><span></span><span></span></div>
+</div>
+<audio id="bgAudio" loop preload="auto"><source src="music.mp3" type="audio/mpeg"></audio>
+
+<div class="scroll-snap">
+
+  <!-- 1 — ГЕРОЙ -->
+  <section id="sec1">
+    <div class="hero-photo">
+      <img src="1000098254.jpg" alt="Shoxrux & Xanifa">
+    </div>
+    <div class="h-ov-top"></div>
+    <div class="h-ov-bot"></div>
+    <div class="hero-content">
+      <div class="hero-top">
+        <span class="top-orn">✦ ✦ ✦</span>
+        <span class="invite-tag">С радостью приглашают вас</span>
+      </div>
+      <div class="hero-bot">
+        <span class="names-calligraphy">Shoxrux</span>
+        <span class="amp-calligraphy">&</span>
+        <span class="names-calligraphy">Xanifa</span>
+        <div class="hero-line">
+          <div class="h-line"></div>
+          <div class="h-dot"></div>
+          <div class="h-line"></div>
+        </div>
+        <span class="hero-sub">Самарканд · 22 Июня · 2026</span>
+        <div class="hero-tagline">на торжество своего бракосочетания</div>
+      </div>
+    </div>
+    <div class="scroll-hint">Листайте</div>
+  </section>
+
+  <!-- 2 — КАЛЕНДАРЬ -->
+  <section id="sec2">
+    <div class="cream-bg"></div>
+    <div class="cream-shimmer"></div>
+    <div class="cream-pattern"></div>
+    <div class="cal-wrap ai">
+      <div class="cal-eyebrow">Дата торжества</div>
+      <div class="cal-box">
+        <div class="cal-title">Июнь 2026</div>
+        <div class="cal-head">
+          <div class="cdn">Пн</div><div class="cdn">Вт</div><div class="cdn">Ср</div>
+          <div class="cdn">Чт</div><div class="cdn">Пт</div><div class="cdn">Сб</div><div class="cdn">Вс</div>
+        </div>
+        <div class="cal-days">
+          <div class="cd">1</div><div class="cd">2</div><div class="cd">3</div><div class="cd">4</div><div class="cd">5</div><div class="cd">6</div><div class="cd">7</div>
+          <div class="cd">8</div><div class="cd">9</div><div class="cd">10</div><div class="cd">11</div><div class="cd">12</div><div class="cd">13</div><div class="cd">14</div>
+          <div class="cd">15</div><div class="cd">16</div><div class="cd">17</div><div class="cd">18</div><div class="cd">19</div><div class="cd">20</div><div class="cd">21</div>
+          <div class="cd hi">22</div><div class="cd">23</div><div class="cd">24</div><div class="cd">25</div><div class="cd">26</div><div class="cd">27</div><div class="cd">28</div>
+          <div class="cd">29</div><div class="cd">30</div>
+          <div class="cd empty"></div><div class="cd empty"></div><div class="cd empty"></div><div class="cd empty"></div><div class="cd empty"></div>
+        </div>
+      </div>
+      <div class="date-banner ai d2">
+        <div class="dn">22</div>
+        <div><div class="dm">Июня</div><div class="dy">2026</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 — Ч/Б ФОТО -->
+  <section id="sec3">
+    <div class="cream-bg"></div>
+    <div class="cream-shimmer"></div>
+    <div class="cream-pattern"></div>
+    <div class="bw-container ai">
+      <img src="1000098255.jpg" alt="pottery">
+      <div class="bw-overlay"><div class="bw-quote">"Двое рук — одна душа"</div></div>
+    </div>
+    <div class="time-block ai d2">
+      <div class="time-eyebrow">Начало торжества</div>
+      <div class="time-big">🕖 19:00</div>
+    </div>
+  </section>
+
+  <!-- 4 — ЛОКАЦИЯ -->
+  <section id="sec4">
+    <div class="cream-bg"></div>
+    <div class="cream-shimmer"></div>
+    <div class="cream-pattern"></div>
+    <div class="loc-card ai">
+      <span class="loc-pin">📍</span>
+      <div class="venue-big">Shoh Saroy</div>
+      <div class="venue-sub2">Банкетный зал · Самарканд</div>
+      <div class="addr">Самарканд, махаллинский сход граждан Орзу,<br>улица Мухаммада Аль-Хорезми</div>
+      <a href="https://yandex.ru/maps/org/shoh_saroy/193297495177" target="_blank" class="map-btn">🗺 Открыть на карте</a>
+      <div class="tt">
+        <div class="tt-title">Программа вечера</div>
+        <div class="ti"><div class="tv">19:00</div><div class="tdot"></div><div class="td">Встреча гостей</div></div>
+        <div class="ti"><div class="tv">19:30</div><div class="tdot"></div><div class="td">Торжественный вход молодых</div></div>
+        <div class="ti"><div class="tv">20:00</div><div class="tdot"></div><div class="td">Праздничный ужин · Живая музыка</div></div>
+        <div class="ti"><div class="tv">21:00</div><div class="tdot"></div><div class="td">Танцы · Поздравления · Конкурсы</div></div>
+        <div class="ti"><div class="tv">23:30</div><div class="tdot"></div><div class="td">Финальный танец молодых</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 — ДРЕСС-КОД -->
+  <section id="sec5">
+    <div class="cream-bg"></div>
+    <div class="cream-shimmer"></div>
+    <div class="cream-pattern"></div>
+    <div class="dress-card ai">
+      <div class="dress-icons"><span>👰🏻</span><span>🤵🏻</span><span>💍</span></div>
+      <div class="dress-ey">Дресс-код</div>
+      <div class="dress-main2">Любой наряд</div>
+      <div class="dress-desc2">Приходите в том, в чём вам комфортно и красиво. Традиционный узбекский костюм или современный — вы будете желанным гостем.</div>
+      <div class="dress-tags">
+        <span class="dtag">Национальный</span><span class="dtag">Классика</span>
+        <span class="dtag">Современный</span><span class="dtag">Нарядный</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 — ПОЖЕЛАНИЕ -->
+  <section id="sec6">
+    <div class="cream-bg"></div>
+    <div class="cream-shimmer"></div>
+    <div class="cream-pattern"></div>
+    <div class="wish-wrap ai">
+      <span class="wish-orn">✦ ✦ ✦</span>
+      <div class="wish-big">Ваше присутствие — самый<br>драгоценный подарок,<br>который вы можете нам преподнести.</div>
+      <div class="g-div"><div class="g-div-icon">❋</div></div>
+      <div class="wish-small">Мы с нетерпением ждём вас, чтобы разделить этот радостный день, наполненный теплом, смехом и воспоминаниями на всю жизнь.<br><br>Пусть ваша дорога к нам будет лёгкой, а вечер — незабываемым.</div>
+      <div class="g-div" style="margin-top:1rem;"><div class="g-div-icon">❋</div></div>
+    </div>
+  </section>
+
+  <!-- 7 — ФИНАЛ -->
+  <section id="sec7">
+    <div class="cream-bg"></div>
+    <div class="cream-shimmer"></div>
+    <div class="cream-pattern"></div>
+    <div class="hearts-float" id="hc"></div>
+    <div class="final-two-photos ai">
+      <div class="final-photo-item">
+        <img src="1000098256.jpg" alt="walking">
+      </div>
+      <div class="final-photo-item">
+        <img src="1000098302.jpg" alt="walking2">
+      </div>
+    </div>
+    <div class="final-text-block ai d2">
+      <div class="final-title">До встречи, 22 июня!</div>
+      <div class="final-sub">Shoxrux & Xanifa · 22.06.2026 · Самарканд</div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // ── Intersection observer ──
+  const els = document.querySelectorAll('.ai');
+  const io = new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.1});
+  els.forEach(el=>io.observe(el));
+
+  // ── Hearts ──
+  const hc=document.getElementById('hc');
+  const hs=['♥','❤','✦','❋','◆'];
+  setInterval(()=>{
+    const h=document.createElement('div'); h.className='hp';
+    h.textContent=hs[Math.floor(Math.random()*hs.length)];
+    h.style.cssText=`left:${Math.random()*100}%;bottom:10%;animation-delay:${Math.random()*2}s;font-size:${0.65+Math.random()*0.75}rem;color:${['#b8935a','#d4b483','#b83225','rgba(26,19,10,0.35)'][Math.floor(Math.random()*4)]};`;
+    hc.appendChild(h); setTimeout(()=>h.remove(),8000);
+  },1000);
+
+  // ── Audio ──
+  const audio = document.getElementById('bgAudio');
+  audio.volume = 0.75;
+  let playing = false;
+
+  function toggleMusic(){
+    if(playing){ audio.pause(); playing=false; }
+    else { audio.play(); playing=true; }
+    document.getElementById('mb').className = 'mbars'+(playing?' on':'');
+  }
+
+  // ── Splash screen — запуск музыки при первом касании ──
+  const splash = document.getElementById('splash');
+  function startExperience(){
+    splash.style.opacity='0';
+    splash.style.pointerEvents='none';
+    setTimeout(()=>splash.style.display='none', 600);
+    audio.play().then(()=>{
+      playing=true;
+      document.getElementById('mb').className='mbars on';
+    }).catch(()=>{});
+  }
+  splash.addEventListener('click', startExperience);
+  splash.addEventListener('touchstart', startExperience);
+</script>
+</body>
+</html>
